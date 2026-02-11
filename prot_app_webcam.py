@@ -37,26 +37,8 @@ class VentanaScripts(QWidget):
 
         layout_principal.addWidget(texto_informativo)
 
-        #Texto primer paso
-        #texto_pasouno = QLabel("1. Abre la aplicación de VLC colocando 'rtsp://192.168.1.1/MJPG?W=640&H=360&Q=50&BR=3000000' en añadir red")
-        #texto_pasouno.setWordWrap(True)
-       # #texto_pasouno.setAlignment(Qt.AlignCenter)
-       # texto_pasouno.setStyleSheet("""
-      #      font-size: 15px;
-       # """)
-        #layout_principal.addWidget(texto_pasouno)
 
-        # VLC
-        #layout_vlc = QHBoxLayout()
-        #label_vlc = QLabel("VLC")
-        #layout_vlc.addWidget(label_vlc)
-        #btn_vlc = QPushButton("Abrir VLC")
-        #btn_vlc.clicked.connect(self.abrir_vlc)
-        #layout_vlc.addWidget(btn_vlc)
-        #layout_principal.addLayout(layout_vlc)
-
-
-        #Texto segundo paso
+    
         texto_pasodos = QLabel("Selecciona la detección que deseas aplicar:")
         texto_pasodos.setWordWrap(True)
         texto_pasodos.setStyleSheet("""
@@ -69,7 +51,8 @@ class VentanaScripts(QWidget):
         layout_principal.addLayout(self.crearSeccion("Detección de basura marina", "/home/cicy2024/detecciones/deteccion_basura_marina_webcam.sh", "deteccion_basura_webcam"))
         layout_principal.addLayout(self.crearSeccion("Detección de humanos", "/home/cicy2024/detecciones/deteccion_humanos_webcam.sh", "deteccion_humanos_webcam"))
         layout_principal.addLayout(self.crearSeccion("Detección de pez león", "/home/cicy2024/detecciones/deteccion_pez_leon_webcam.sh", "deteccion_pez_leon_webcam"))
-
+        layout_principal.addLayout(self.crearSeccion("Detección de personas 2", "/home/cicy2024/detecciones/deteccion_humanos.sh", "deteccion_humanos2"))
+        layout_principal.addLayout(self.crearSeccion("Terminar proceso", "/home/cicy2024/detecciones/kill.sh", "kill_darknet"))
         #Texto manuales
         texto_manual = QLabel("Encuentra más información sobre las detecciones a continuación:")
         texto_manual.setWordWrap(True)

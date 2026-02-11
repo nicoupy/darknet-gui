@@ -46,14 +46,14 @@ class VentanaScripts(QWidget):
         """)
         layout_principal.addWidget(texto_pasouno)
 
-        # VLC
-        layout_vlc = QHBoxLayout()
-        label_vlc = QLabel("Darknet YOLO")
-        layout_vlc.addWidget(label_vlc)
-        btn_vlc = QPushButton("Abrir Deteccion")
-        btn_vlc.clicked.connect(self.abrir_vlc)
-        layout_vlc.addWidget(btn_vlc)
-        layout_principal.addLayout(layout_vlc)
+        # darknet1
+        layout_darknet1 = QHBoxLayout()
+        label_darknet1 = QLabel("Darknet YOLO")
+        layout_darknet1.addWidget(label_darknet1)
+        btn_darknet1 = QPushButton("Abrir Deteccion")
+        btn_darknet1.clicked.connect(self.deteccion_personas)
+        layout_darknet1.addWidget(btn_darknet1)
+        layout_principal.addLayout(layout_darknet1)
 
 
   
@@ -86,11 +86,16 @@ class VentanaScripts(QWidget):
         else:
             print(f"{clave} ya está en ejecución.")
 
-    def abrir_vlc(self):
+    def deteccion_personas(self):
         try:
             subprocess.Popen(["bash", "/home/cicy2024/detecciones/deteccion_humanos2.sh"])
         except Exception as e:
-            print("Error al abrir VLC:", e)
+            print("Error al abrir Darknet:", e)
+    def terminar_proceso(self):
+        try:
+            subprocess.Popen(["bash", "/home/cicy2024/detecciones/kill.sh"])
+        except Exception as e:
+            print("Error al terminar proceso:", e)
 
     def abrir_carpeta(self):
         carpeta_path = "/home/cicy2024/detecciones/Manuales"

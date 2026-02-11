@@ -88,8 +88,7 @@ class VentanaScripts(QWidget):
 
     def abrir_vlc(self):
         try:
-        	subprocess.Popen(["bash", "/home/cicy2024/detecciones/deteccion_humanos2.sh"]
-            print("VLC abierto.")
+            subprocess.Popen(["bash", "/home/cicy2024/detecciones/deteccion_humanos2.sh"])
         except Exception as e:
             print("Error al abrir VLC:", e)
 

@@ -10,7 +10,7 @@ class VentanaScripts(QWidget):
         super().__init__()
 
         self.setWindowTitle("Detección en Visión Artificial")
-        self.setGeometry(600, 200, 400, 600)
+        self.setGeometry(200, 200, 400, 600)
 
         # Diccionario para almacenar los procesos de cada script
         self.procesos = {
@@ -37,6 +37,25 @@ class VentanaScripts(QWidget):
 
         layout_principal.addWidget(texto_informativo)
 
+        #Texto primer paso
+        texto_pasouno = QLabel("1. Abre la aplicación de VLC colocando 'rtsp://192.168.1.1/MJPG?W=640&H=360&Q=50&BR=3000000' en añadir red")
+        texto_pasouno.setWordWrap(True)
+        #texto_pasouno.setAlignment(Qt.AlignCenter)
+        texto_pasouno.setStyleSheet("""
+            font-size: 15px;
+        """)
+        layout_principal.addWidget(texto_pasouno)
+
+        # VLC
+        layout_vlc = QHBoxLayout()
+        label_vlc = QLabel("VLC")
+        layout_vlc.addWidget(label_vlc)
+        btn_vlc = QPushButton("Abrir VLC")
+        btn_vlc.clicked.connect(self.abrir_vlc)
+        layout_vlc.addWidget(btn_vlc)
+        layout_principal.addLayout(layout_vlc)
+
+
         #Texto segundo paso
         texto_pasodos = QLabel("2. Selecciona la detección que deseas aplicar:")
         texto_pasodos.setWordWrap(True)
@@ -47,12 +66,28 @@ class VentanaScripts(QWidget):
 
 
         # Scripts
-        layout_principal.addLayout(self.crearSeccion("Ejecutar darknet", "/home/cicy2024/detecciones/deteccion_humanos2.sh", "deteccion_humanos2"))
-        layout_principal.addLayout(self.crearSeccion("Terminar proceso", "/home/cicy2024/detecciones/kill.sh", "deteccion_humanos"))
+        layout_principal.addLayout(self.crearSeccion("Detección de basura marina", "/home/cicy2024/detecciones/deteccion_basura_marina.sh", "deteccion_basura"))
+        layout_principal.addLayout(self.crearSeccion("Detección de humanos", "/home/cicy2024/detecciones/deteccion_humanos.sh", "deteccion_humanos"))
         layout_principal.addLayout(self.crearSeccion("Detección de pez león", "/home/cicy2024/detecciones/deteccion_pez_leon.sh", "deteccion_pez_leon"))
-        layout_principal.addLayout(self.crearSeccion("Detección de personas 2", "/home/cicy2024/detecciones/deteccion_humanos.sh", "deteccion_humanos2"))
-        layout_principal.addLayout(self.crearSeccion("Terminar proceso", "/home/cicy2024/detecciones/kill.sh", "kill_darknet"))
-                
+      
+        # darknet1
+        layout_darknet1 = QHBoxLayout()
+        label_darknet1 = QLabel("Darknet YOLO")
+        layout_darknet1.addWidget(label_darknet1)
+        btn_darknet1 = QPushButton("Abrir Deteccion")
+        btn_darknet1.clicked.connect(self.deteccion_personas)
+        layout_darknet1.addWidget(btn_darknet1)
+        layout_principal.addLayout(layout_darknet1)
+
+        # kill darknet
+        layout_kill = QHBoxLayout()
+        label_kill = QLabel("Cerrar Detección")
+        layout_kill.addWidget(label_kill)
+        btn_kill = QPushButton("Kill Darknet")
+        btn_kill.clicked.connect(self.terminar_proceso)
+        layout_kill.addWidget(btn_kill)
+        layout_principal.addLayout(layout_kill)
+        
         #Texto manuales
         texto_manual = QLabel("Encuentra más información sobre las detecciones a continuación:")
         texto_manual.setWordWrap(True)
@@ -122,6 +157,17 @@ class VentanaScripts(QWidget):
             print("VLC abierto.")
         except Exception as e:
             print("Error al abrir VLC:", e)
+            
+    def deteccion_personas(self):
+        try:
+            subprocess.Popen(["bash", "/home/cicy2024/detecciones/deteccion_humanos2.sh"])
+        except Exception as e:
+            print("Error al abrir Darknet:", e)
+    def terminar_proceso(self):
+        try:
+            subprocess.Popen(["bash", "/home/cicy2024/detecciones/kill.sh"])
+        except Exception as e:
+            print("Error al terminar proceso:", e)
 
     def abrir_carpeta(self):
         carpeta_path = "/home/cicy2024/detecciones/Manuales"

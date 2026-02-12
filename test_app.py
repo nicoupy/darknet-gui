@@ -55,10 +55,14 @@ class VentanaScripts(QWidget):
         layout_darknet1.addWidget(btn_darknet1)
         layout_principal.addLayout(layout_darknet1)
 
-
-  
-
-
+        # kill darknet
+        layout_kill = QHBoxLayout()
+        label_kill = QLabel("Cerrar Detección")
+        layout_kill.addWidget(label_kill)
+        btn_kill = QPushButton("Kill Darknet")
+        btn_kill.clicked.connect(self.terminar_proceso)
+        layout_kill.addWidget(btn_kill)
+        layout_principal.addLayout(layout_kill)
 
         self.setLayout(layout_principal)
                 

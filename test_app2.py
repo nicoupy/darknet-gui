@@ -52,8 +52,7 @@ class VentanaScripts(QWidget):
         layout_principal.addLayout(self.crearSeccion("Detección de pez león", "/home/cicy2024/detecciones/deteccion_pez_leon.sh", "deteccion_pez_leon"))
         layout_principal.addLayout(self.crearSeccion("Detección de personas 2", "/home/cicy2024/detecciones/deteccion_humanos.sh", "deteccion_humanos2"))
         layout_principal.addLayout(self.crearSeccion("Terminar proceso", "/home/cicy2024/detecciones/kill.sh", "kill_darknet"))
-
-        
+                
         #Texto manuales
         texto_manual = QLabel("Encuentra más información sobre las detecciones a continuación:")
         texto_manual.setWordWrap(True)
